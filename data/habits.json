@@ -1,1 +1,12 @@
-["dance ", "editing ", "cooking ", "learning python ", "cycle ", "2.0 dane "]
+[
+    {
+        "name": "workout",
+        "completed": true,
+        "date": "2026-05-29"
+    },
+    {
+        "name": "dance ",
+        "completed": true,
+        "date": "2026-05-29"
+    }
+]

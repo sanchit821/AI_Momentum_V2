@@ -1,11 +1,16 @@
 [
     {
-        "name": "workout",
+        "name": "dance ",
         "completed": true,
         "date": "2026-05-29"
     },
     {
-        "name": "dance ",
+        "name": "gym",
+        "completed": true,
+        "date": "2026-05-29"
+    },
+    {
+        "name": " gaming ",
         "completed": true,
         "date": "2026-05-29"
     }

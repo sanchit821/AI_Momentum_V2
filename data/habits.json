@@ -1,22 +1,12 @@
 [
     {
-        "name": "dance ",
-        "completed": true,
-        "date": "2026-05-29"
-    },
-    {
-        "name": "gym",
-        "completed": true,
-        "date": "2026-05-29"
-    },
-    {
-        "name": " gaming ",
-        "completed": true,
-        "date": "2026-05-29"
-    },
-    {
-        "name": "reading ",
-        "completed": true,
-        "date": "2026-05-29"
+        "name": "gum",
+        "history": [
+            {
+                "date": "2026-05-29",
+                "completed": true
+            },
+            "2026-05-29"
+        ]
     }
 ]

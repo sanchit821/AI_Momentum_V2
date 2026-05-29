@@ -11,9 +11,24 @@ habits = st.session_state.get("habits", [])
 # Basic stats
 total_habits = len(habits)
 
-completed_habits = sum(
-    1 for habit in habits if habit["completed"]
-)
+today = datetime.now().strftime("%Y-%m-%d")
+
+completed_habits = 0
+
+for habit in habits:
+
+    history = habit.get("history", [])
+
+    for entry in history:
+
+        if isinstance(entry, dict):
+
+            if (
+                entry.get("date") == today and
+                entry.get("completed")
+            ):
+                completed_habits += 1
+ 
 
 # Completion percentage
 if total_habits > 0:
@@ -29,10 +44,7 @@ else:
 
 today = datetime.now().strftime("%Y-%m-%d")
 
-completed_today = any(
-    habit["completed"] and habit["date"] == today
-    for habit in habits
-)
+completed_today = completed_habits > 0
 
 if completed_today:
     streak = 1

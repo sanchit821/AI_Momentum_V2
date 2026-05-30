@@ -70,5 +70,14 @@
                 "completed": true
             }
         ]
+    },
+    {
+        "name": "gym 2.0",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
     }
 ]

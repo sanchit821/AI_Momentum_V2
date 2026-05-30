@@ -93,8 +93,6 @@ productivity_score = round(
     ((average_mood / 5) * 100 * 0.3)
 )
 
-
-
 # =========================
 # 🔥 Streak v2
 # =========================
@@ -115,9 +113,6 @@ for habit in habits:
             and entry.get("completed")
         ):
             completed_dates.add(entry.get("date"))
-
-
-
 
 # Convert strings to date objects
 date_objects = sorted(
@@ -146,6 +141,90 @@ if date_objects:
         else:
             break
 
+# =========================
+# 🏆 Most Consistent Habit
+# =========================
+
+most_consistent_habit = "No habits yet"
+most_completions = 0
+
+for habit in habits:
+
+    history = habit.get("history", [])
+
+    completed_count = 0
+
+    for entry in history:
+
+        if (
+            isinstance(entry, dict)
+            and entry.get("completed")
+        ):
+            completed_count += 1
+
+    if completed_count > most_completions:
+
+        most_completions = completed_count
+        most_consistent_habit = habit.get(
+            "name",
+            "Unknown"
+        )
+
+
+# =========================
+# 🏆 Habit Leaderboard
+# =========================
+
+habit_rankings = []
+
+for habit in habits:
+
+    history = habit.get("history", [])
+
+    completed_count = 0
+
+    for entry in history:
+
+        if (
+            isinstance(entry, dict)
+            and entry.get("completed")
+        ):
+            completed_count += 1
+
+    habit_rankings.append(
+        (
+            habit.get("name", "Unknown"),
+            completed_count
+        )
+    )
+
+habit_rankings.sort(
+    key=lambda x: x[1],
+    reverse=True
+)
+
+st.divider()
+
+st.subheader("🏆 Habit Analytics")
+
+st.info(
+    f"Most Consistent Habit: "
+    f"{most_consistent_habit} "
+    f"({most_completions} completions)"
+)
+
+st.write("### 🏆 Top Habits")
+
+medals = ["🥇", "🥈", "🥉"]
+
+for i, habit_data in enumerate(habit_rankings[:3]):
+
+    habit_name = habit_data[0]
+    completions = habit_data[1]
+
+    st.write(
+        f"{medals[i]} {habit_name} — {completions} completions"
+    ) 
 
 # Longest Streak
 longest_streak = 0
@@ -208,7 +287,7 @@ momentum_score = (
 # Dashboard Cards
 # =========================
 
-col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
     st.metric("📌 Total Habits", total_habits)
@@ -222,14 +301,15 @@ with col3:
 with col4:
     st.metric("⚡ Momentum Score", momentum_score)
 
-with col6:
-    st.metric("🏆 Longest Streak", longest_streak) 
+with col5:
+    st.metric("🏆 Longest Streak", longest_streak)
 
-with col7:
+with col6:
     st.metric(
         "⚡ Productivity",
         f"{productivity_score}%"
     )
+
 st.divider()
 
 # =========================

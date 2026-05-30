@@ -63,6 +63,7 @@ date_objects = sorted(
     for d in completed_dates
 )
 
+# Current Streak
 streak = 0
 
 if date_objects:
@@ -82,6 +83,30 @@ if date_objects:
             streak += 1
         else:
             break
+
+
+# Longest Streak
+longest_streak = 0
+
+if date_objects:
+
+    current_streak = 1
+    longest_streak = 1
+
+    for i in range(1, len(date_objects)):
+
+        if (
+            date_objects[i] -
+            date_objects[i - 1]
+        ).days == 1:
+
+            current_streak += 1
+
+            if current_streak > longest_streak:
+                longest_streak = current_streak
+
+        else:
+            current_streak = 1
 
 # =========================
 # 📊 Consistency Analytics
@@ -121,7 +146,7 @@ momentum_score = (
 # Dashboard Cards
 # =========================
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
     st.metric("📌 Total Habits", total_habits)
@@ -135,8 +160,8 @@ with col3:
 with col4:
     st.metric("⚡ Momentum Score", momentum_score)
 
-with col5:
-    st.metric("📊 Consistency", f"{consistency_rate}%")
+with col6:
+    st.metric("🏆 Longest Streak", longest_streak) 
 
 st.divider()
 

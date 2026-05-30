@@ -2,24 +2,11 @@ import streamlit as st
 import json
 import os
 from datetime import datetime
+from utils.habit_utils import load_habits, save_habits
 
 st.set_page_config(page_title="Habits", layout="wide")
 
-DATA_FILE = "data/habits.json"
 
-
-# Load habits
-def load_habits():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    return []
-
-
-# Save habits
-def save_habits(habits):
-    with open(DATA_FILE, "w") as f:
-        json.dump(habits, f, indent=4)
 
 
 # Initialize session state

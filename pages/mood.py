@@ -3,21 +3,10 @@ import pandas as pd
 import json
 import os
 from datetime import datetime
+from utils.mood_utils import load_moods, save_moods
 
 st.set_page_config(page_title="Mood Tracker", layout="wide")
-DATA_FILE = "data/mood.json"
 
-
-def load_moods():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    return []
-
-
-def save_moods(moods):
-    with open(DATA_FILE, "w") as f:
-        json.dump(moods, f, indent=4)
 
 st.title("😊 Mood Tracker")
 

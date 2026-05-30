@@ -1,15 +1,7 @@
 [
     {
-        "name": "gym",
+        "name": "cooking ",
         "history": [
-            {
-                "date": "2026-05-28",
-                "completed": true
-            },
-            {
-                "date": "2026-05-29",
-                "completed": true
-            },
             {
                 "date": "2026-05-30",
                 "completed": true
@@ -17,7 +9,34 @@
         ]
     },
     {
-        "name": "dance ",
+        "name": "dance",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "name": "dreams",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "name": "badminton ",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "name": "bad boys ",
         "history": [
             {
                 "date": "2026-05-30",

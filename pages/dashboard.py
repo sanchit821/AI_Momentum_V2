@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from datetime import datetime
 
 st.set_page_config(page_title="AI Momentum Dashboard", layout="wide")
@@ -175,22 +176,128 @@ st.progress(completion_percent / 100)
 
 st.write(f"### {completion_percent}% Completed")
 
+# =========================
+# 🤖 Smart Insights
+# =========================
+
 st.divider()
 
-# =========================
-# Insights
-# =========================
-
-st.write("## Insights")
+st.write("## 🤖 Smart Insights")
 
 if total_habits == 0:
-    st.warning("Add habits to start tracking momentum.")
 
-elif completion_percent == 100:
-    st.success("Excellent consistency today 🔥")
-
-elif completion_percent >= 60:
-    st.info("Good progress. Keep pushing.")
+    st.warning(
+        "Add habits to start building momentum."
+    )
 
 else:
-    st.warning("Momentum is low today. Complete small tasks first.")
+
+    # Completion Insight
+    if completion_percent == 100:
+        st.success(
+            "🔥 Perfect day. Every habit is completed."
+        )
+
+    elif completion_percent >= 75:
+        st.info(
+            "💪 Strong progress today. Keep the momentum going."
+        )
+
+    elif completion_percent >= 50:
+        st.info(
+            "📈 You're halfway there. One more habit can change the day."
+        )
+
+    else:
+        st.warning(
+            "⚠️ Momentum is low today. Start with your easiest habit."
+        )
+
+    # Consistency Insight
+    if consistency_rate >= 80:
+        st.success(
+            "🏆 Your consistency is excellent."
+        )
+
+    elif consistency_rate >= 60:
+        st.info(
+            "📊 Your consistency is improving steadily."
+        )
+
+    else:
+        st.warning(
+            "📉 Consistency needs attention. Focus on showing up daily."
+        )
+
+    # Streak Insight
+    if streak >= 7:
+        st.success(
+            f"🔥 You are on a {streak}-day streak. Protect it."
+        )
+
+    elif streak >= 3:
+        st.info(
+            f"🔥 Nice work. Current streak: {streak} days."
+        )
+
+    else:
+        st.info(
+            "🌱 Build a streak by completing habits every day."
+        )
+
+    # Longest Streak Insight
+    if longest_streak >= 10:
+        st.success(
+            f"🏅 Longest streak: {longest_streak} days. Great discipline."
+        )
+
+    elif longest_streak >= 5:
+        st.info(
+            f"🏅 Longest streak: {longest_streak} days."
+        )
+
+    # -------------------------------------------------------------------------------------------------------------
+
+    # =========================
+# 📊 Weekly Analytics
+# =========================
+
+st.divider()
+
+st.write("## 📊 Habit Completion History")
+
+completion_data = {}
+
+for habit in habits:
+
+    history = habit.get("history", [])
+
+    for entry in history:
+
+        if (
+            isinstance(entry, dict)
+            and entry.get("completed")
+        ):
+
+            date = entry.get("date")
+
+            if date in completion_data:
+                completion_data[date] += 1
+            else:
+                completion_data[date] = 1
+
+if completion_data:
+
+    df = pd.DataFrame(
+        list(completion_data.items()),
+        columns=["Date", "Completed Habits"]
+    )
+
+    df = df.sort_values("Date")
+
+    st.bar_chart(
+        df.set_index("Date")
+    )
+
+else:
+    st.info("No completion history available yet.")

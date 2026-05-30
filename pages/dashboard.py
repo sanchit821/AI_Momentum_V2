@@ -40,12 +40,48 @@ else:
 # 🔥 Streak v2
 # =========================
 
-completed_today = completed_habits > 0
+# =========================
+# 🔥 REAL STREAK CALCULATION
+# =========================
 
-if completed_today:
+completed_dates = set()
+
+for habit in habits:
+    history = habit.get("history", [])
+
+    for entry in history:
+
+        if (
+            isinstance(entry, dict)
+            and entry.get("completed")
+        ):
+            completed_dates.add(entry.get("date"))
+
+# Convert strings to date objects
+date_objects = sorted(
+    datetime.strptime(d, "%Y-%m-%d").date()
+    for d in completed_dates
+)
+
+streak = 0
+
+if date_objects:
+
     streak = 1
-else:
-    streak = 0
+
+    for i in range(
+        len(date_objects) - 1,
+        0,
+        -1
+    ):
+
+        current_day = date_objects[i]
+        previous_day = date_objects[i - 1]
+
+        if (current_day - previous_day).days == 1:
+            streak += 1
+        else:
+            break
 
 # =========================
 # 📊 Consistency Analytics

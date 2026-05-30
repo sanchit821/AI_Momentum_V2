@@ -4,7 +4,15 @@ from datetime import datetime
 
 st.set_page_config(page_title="AI Momentum Dashboard", layout="wide")
 
-st.title("⚡ AI Momentum Dashboard")
+st.markdown("""
+# ⚡ AI Momentum Dashboard
+
+Track habits. Build momentum. Improve daily.
+""")
+
+st.info(
+    "🚀 Focus on consistency, not perfection."
+)
 
 # Load habits safely
 habits = st.session_state.get("habits", [])
@@ -170,7 +178,7 @@ st.divider()
 # Progress Section
 # =========================
 
-st.write("## Today's Progress")
+st.subheader("📈 Today's Progress")
 
 st.progress(completion_percent / 100)
 
@@ -182,7 +190,7 @@ st.write(f"### {completion_percent}% Completed")
 
 st.divider()
 
-st.write("## 🤖 Smart Insights")
+st.subheader("🤖 Smart Insights")
 
 if total_habits == 0:
 
@@ -264,7 +272,7 @@ else:
 
 st.divider()
 
-st.write("## 📊 Habit Completion History")
+st.subheader("📊 Habit Completion History")
 
 completion_data = {}
 

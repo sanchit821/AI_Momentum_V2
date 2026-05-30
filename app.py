@@ -1,26 +1,5 @@
-# import streamlit as st
-
-# st.set_page_config(
-#     page_title="AI Momentum",
-#     page_icon="⚡",
-#     layout="wide"
-# )
-
-# st.title("⚡ AI Momentum")
-# st.subheader("Build Discipline. Track Progress. Stay Consistent.")
-
-# st.write("Use the sidebar to navigate between pages.")
-
-
-
-
-
-
-
 import streamlit as st
-with st.sidebar:
-    st.write("AI Momentum")
-    st.write("Navigation")
+ 
 # ── Page config ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="AI Momentum",
@@ -28,6 +7,34 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+st.markdown("""
+<style>
+
+/* Main app padding */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* Headers */
+h1 {
+    font-weight: 700;
+}
+
+h2 {
+    padding-top: 10px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # ── Custom CSS ─────────────────────────────────────────────────────────────────
 st.markdown("""

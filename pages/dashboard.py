@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import json
+import os
 
 st.set_page_config(page_title="AI Momentum Dashboard", layout="wide")
 
@@ -16,7 +18,12 @@ st.info(
 
 # Load habits safely
 habits = st.session_state.get("habits", [])
+# Load moods
+moods = []
 
+if os.path.exists("data/mood.json"):
+    with open("data/mood.json", "r") as f:
+        moods = json.load(f)
 # Today's date
 today = datetime.now().strftime("%Y-%m-%d")
 
@@ -44,6 +51,49 @@ if total_habits > 0:
     )
 else:
     completion_percent = 0
+# =========================
+# 😊 Average Mood
+# =========================
+
+mood_values = {
+    "Great 😊": 5,
+    "Good 🙂": 4,
+    "Neutral 😐": 3,
+    "Bad 😕": 2,
+    "Terrible 😣": 1
+}
+
+average_mood = 0
+
+if moods:
+
+    scores = []
+
+    for entry in moods:
+
+        mood_name = entry.get("mood")
+
+        if mood_name in mood_values:
+            scores.append(
+                mood_values[mood_name]
+            )
+
+    if scores:
+        average_mood = round(
+            sum(scores) / len(scores),
+            1
+        )
+
+# =========================
+# ⚡ Productivity Score
+# =========================
+
+productivity_score = round(
+    (completion_percent * 0.7) +
+    ((average_mood / 5) * 100 * 0.3)
+)
+
+
 
 # =========================
 # 🔥 Streak v2
@@ -65,6 +115,9 @@ for habit in habits:
             and entry.get("completed")
         ):
             completed_dates.add(entry.get("date"))
+
+
+
 
 # Convert strings to date objects
 date_objects = sorted(
@@ -155,7 +208,7 @@ momentum_score = (
 # Dashboard Cards
 # =========================
 
-col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
 with col1:
     st.metric("📌 Total Habits", total_habits)
@@ -172,6 +225,11 @@ with col4:
 with col6:
     st.metric("🏆 Longest Streak", longest_streak) 
 
+with col7:
+    st.metric(
+        "⚡ Productivity",
+        f"{productivity_score}%"
+    )
 st.divider()
 
 # =========================

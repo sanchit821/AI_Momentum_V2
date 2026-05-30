@@ -43,5 +43,23 @@
                 "completed": true
             }
         ]
+    },
+    {
+        "name": "cycling",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "name": "habits",
+        "history": [
+            {
+                "date": "2026-05-30",
+                "completed": true
+            }
+        ]
     }
 ]

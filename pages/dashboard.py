@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime, timedelta
+from datetime import datetime
 
 st.set_page_config(page_title="AI Momentum Dashboard", layout="wide")
 
@@ -8,27 +8,25 @@ st.title("⚡ AI Momentum Dashboard")
 # Load habits safely
 habits = st.session_state.get("habits", [])
 
+# Today's date
+today = datetime.now().strftime("%Y-%m-%d")
+
 # Basic stats
 total_habits = len(habits)
 
-today = datetime.now().strftime("%Y-%m-%d")
-
 completed_habits = 0
 
+# Count today's completed habits
 for habit in habits:
-
     history = habit.get("history", [])
 
     for entry in history:
-
         if isinstance(entry, dict):
-
             if (
-                entry.get("date") == today and
-                entry.get("completed")
+                entry.get("date") == today
+                and entry.get("completed")
             ):
                 completed_habits += 1
- 
 
 # Completion percentage
 if total_habits > 0:
@@ -39,10 +37,8 @@ else:
     completion_percent = 0
 
 # =========================
-# 🔥 STREAK LOGIC
+# 🔥 Streak v2
 # =========================
-
-today = datetime.now().strftime("%Y-%m-%d")
 
 completed_today = completed_habits > 0
 
@@ -52,7 +48,32 @@ else:
     streak = 0
 
 # =========================
-# Momentum score
+# 📊 Consistency Analytics
+# =========================
+
+total_history_entries = 0
+completed_history_entries = 0
+
+for habit in habits:
+    history = habit.get("history", [])
+
+    for entry in history:
+        if isinstance(entry, dict):
+
+            total_history_entries += 1
+
+            if entry.get("completed"):
+                completed_history_entries += 1
+
+if total_history_entries > 0:
+    consistency_rate = int(
+        (completed_history_entries / total_history_entries) * 100
+    )
+else:
+    consistency_rate = 0
+
+# =========================
+# ⚡ Momentum Score
 # =========================
 
 momentum_score = (
@@ -60,8 +81,11 @@ momentum_score = (
     (streak * 10)
 )
 
-# Dashboard cards
-col1, col2, col3, col4 = st.columns(4)
+# =========================
+# Dashboard Cards
+# =========================
+
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     st.metric("📌 Total Habits", total_habits)
@@ -75,17 +99,26 @@ with col3:
 with col4:
     st.metric("⚡ Momentum Score", momentum_score)
 
+with col5:
+    st.metric("📊 Consistency", f"{consistency_rate}%")
+
 st.divider()
 
-# Progress section
+# =========================
+# Progress Section
+# =========================
+
 st.write("## Today's Progress")
 
 st.progress(completion_percent / 100)
 
 st.write(f"### {completion_percent}% Completed")
 
-# Insights
 st.divider()
+
+# =========================
+# Insights
+# =========================
 
 st.write("## Insights")
 

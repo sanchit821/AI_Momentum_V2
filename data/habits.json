@@ -5,6 +5,10 @@
             {
                 "date": "2026-05-30",
                 "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
             }
         ]
     },
@@ -13,6 +17,10 @@
         "history": [
             {
                 "date": "2026-05-30",
+                "completed": true
+            },
+            {
+                "date": "2026-05-31",
                 "completed": true
             }
         ]
@@ -23,6 +31,10 @@
             {
                 "date": "2026-05-30",
                 "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
             }
         ]
     },
@@ -31,6 +43,10 @@
         "history": [
             {
                 "date": "2026-05-30",
+                "completed": true
+            },
+            {
+                "date": "2026-05-31",
                 "completed": true
             }
         ]
@@ -41,6 +57,10 @@
             {
                 "date": "2026-05-30",
                 "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
             }
         ]
     },
@@ -49,6 +69,10 @@
         "history": [
             {
                 "date": "2026-05-30",
+                "completed": true
+            },
+            {
+                "date": "2026-05-31",
                 "completed": true
             }
         ]
@@ -59,6 +83,10 @@
             {
                 "date": "2026-05-30",
                 "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
             }
         ]
     },
@@ -68,6 +96,10 @@
             {
                 "date": "2026-05-30",
                 "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
             }
         ]
     },
@@ -76,6 +108,19 @@
         "history": [
             {
                 "date": "2026-05-30",
+                "completed": true
+            },
+            {
+                "date": "2026-05-31",
+                "completed": true
+            }
+        ]
+    },
+    {
+        "name": "Mac",
+        "history": [
+            {
+                "date": "2026-05-31",
                 "completed": true
             }
         ]

@@ -203,8 +203,115 @@ habit_rankings.sort(
     reverse=True
 )
 
+
+# =========================
+# 📊 Last 7 Days Analytics
+# =========================
+
 st.divider()
 
+st.subheader("📊 Last 7 Days Analytics")
+
+from datetime import timedelta
+
+last_7_days = {}
+
+for i in range(7):
+
+    day = (
+        datetime.now().date()
+        - timedelta(days=i)
+    ).strftime("%Y-%m-%d")
+
+    last_7_days[day] = 0
+
+for habit in habits:
+
+    history = habit.get("history", [])
+
+    for entry in history:
+
+        if (
+            isinstance(entry, dict)
+            and entry.get("completed")
+        ):
+
+            date = entry.get("date")
+
+            if date in last_7_days:
+                last_7_days[date] += 1
+
+                total_last_7_days = sum(
+    last_7_days.values()
+)
+
+average_per_day = round(
+    total_last_7_days / 7,
+    1
+)
+
+best_day = max(
+    last_7_days,
+    key=last_7_days.get
+)
+
+lowest_day = min(
+    last_7_days,
+    key=last_7_days.get
+)
+
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric(
+        "✅ Total",
+        total_last_7_days
+    )
+
+with col2:
+    st.metric(
+        "📈 Avg / Day",
+        average_per_day
+    )
+
+with col3:
+    st.metric(
+        "🏆 Best Day",
+        best_day
+    )
+
+with col4:
+    st.metric(
+        "📉 Lowest Day",
+        lowest_day
+    )
+
+
+    analytics_df = pd.DataFrame(
+    list(last_7_days.items()),
+    columns=[
+        "Date",
+        "Completions"
+    ]
+)
+
+analytics_df = analytics_df.sort_values(
+    "Date"
+)
+
+st.bar_chart(
+    analytics_df.set_index("Date")
+)
+
+
+
+# =========================
+
+# 🏆 Habit Analytics Display
+
+# =========================
+st.divider()
 st.subheader("🏆 Habit Analytics")
 
 st.info(
